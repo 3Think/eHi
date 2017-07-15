@@ -78,9 +78,12 @@ if (! $conn) {
 mysqli_query($conn, "SET NAMES UTF8");
 
 // 获取数据总数
-$total_sql = "SELECT * FROM page";
+$total_sql = "SELECT count(*) count FROM page";
 $resultp = mysqli_query($conn, $total_sql);
-$total = mysqli_num_rows($resultp);
+//$total = mysqli_num_rows($resultp);
+$row = mysqli_fetch_assoc($resultp);
+$total = $row['count'];
+	
 // echo "总条数：".$total;
 // 计算页数
 $total_pages = ceil($total / $pageSize);
